@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Toàn Bộ Blockchain</title>
+</head>
+
+<body>
+    <h1>Danh Sách Block</h1>
+    {% for block in blocks %}
+    <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <h3>Block #{{ block.index }}</h3>
+        <p><strong>Timestamp:</strong> {{ block.timestamp }}</p>
+        <p><strong>Previous Hash:</strong> {{ block.previous_hash }}</p>
+        <p><strong>Current Hash:</strong> {{ block.current_hash }}</p>
+        <p><strong>Public Hash:</strong> {{ block.public_hash }}</p>
+
+        <h4>Giao Dịch:</h4>
+        <ul>
+            {% for tx in block.transactions %}
+            <li>{{ tx.producer }} - {{ tx.amount }}kg - {{ tx.date }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    {% endfor %}
+    <nav style="margin-bottom: 20px;">
+        <a href="{% url 'producer' %}">Trang nhập dữ liệu</a> | {# Changed from 'block_list' to 'producer' #}
+        <a href="{% url 'verification' %}">Xác nhận giao dịch</a> | {# Changed from 'block_list' to 'verification' #}
+        <a href="{% url 'block_list' %}">Xem block</a> |
+        <a href="{% url 'verify_block' %}">Kiểm tra hash</a>
+    </nav>
+</body>
+
+</html>

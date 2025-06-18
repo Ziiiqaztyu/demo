@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nhập Thông Tin Gạo</title>
+</head>
+
+<body>
+    <h1>Nhà Sản Xuất</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="producer" placeholder="Tên nhà sản xuất" required>
+        <input type="number" name="amount" placeholder="Lượng gạo (kg)" required>
+        <input type="date" name="date" required>
+        <button type="submit">Gửi Thông Tin</button>
+    </form>
+
+        <nav style="margin-bottom: 20px;">
+            <a href="{% url 'producer' %}">Trang nhập dữ liệu</a> |  {# Changed from 'block_list' to 'producer' #}
+            <a href="{% url 'verification' %}">Xác nhận giao dịch</a> | {# Changed from 'block_list' to 'verification' #}
+            <a href="{% url 'block_list' %}">Xem block</a> |
+            <a href="{% url 'verify_block' %}">Kiểm tra hash</a>
+        </nav>
+</body>
+
+</html>

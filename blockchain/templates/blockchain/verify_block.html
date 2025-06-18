@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kiểm Tra Block</title>
+</head>
+
+<body>
+    <h1>Kiểm Tra Tính Hợp Lệ Block</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="public_hash" placeholder="Nhập Public Hash" required />
+        <button type="submit">Kiểm Tra</button>
+    </form>
+
+    {% if block %}
+    <h2>Thông Tin Block</h2>
+    <p><strong>Index:</strong> {{ block.index }}</p>
+    <p><strong>Thời Gian:</strong> {{ block.timestamp }}</p>
+    <p><strong>Public Hash:</strong> {{ block.public_hash }}</p>
+    <p>
+        <strong>Tình Trạng:</strong> {% if valid %}Hợp lệ{% else %}Không hợp lệ{% endif %}
+    </p>
+    {% endif %} 
+    
+    {# Thêm ngắt dòng hoặc khoảng trắng để tách biệt rõ ràng khối if này #}
+    {% if error %}
+    <p style="color: red">{{ error }}</p>
+    {% endif %}
+
+    <nav style="margin-bottom: 20px">
+        <a href="{% url 'producer' %}">Trang nhập dữ liệu</a> |
+        <a href="{% url 'verification' %}">Xác nhận giao dịch</a> |
+        <a href="{% url 'block_list' %}">Xem block</a> |
+        <a href="{% url 'verify_block' %}">Kiểm tra hash</a>
+    </nav>
+</body>
+
+</html>
