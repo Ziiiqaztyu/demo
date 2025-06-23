@@ -36,3 +36,4 @@ class PendingTransaction(models.Model):
     production_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     verifications = models.JSONField(default=list)  # Track verification nodes
+    is_ready_for_block = models.BooleanField(default=False) #thêm dòng này mong là nó chạy oke trên render :(((
