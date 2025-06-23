@@ -102,24 +102,38 @@ class Blockchain:
         return None # Không đủ giao dịch để tạo block
 
     def validate_chain(self):
-        # Lấy toàn bộ chuỗi từ database để đảm bảo tính toàn vẹn khi kiểm tra
         chain_from_db = list(Block.objects.all().order_by('index'))
         if not chain_from_db:
+            print("Blockchain: Chain is empty, considered valid.")
             return True # Chuỗi rỗng vẫn hợp lệ
 
         for i in range(1, len(chain_from_db)):
             current = chain_from_db[i]
             previous = chain_from_db[i-1]
 
+            # In thông tin debug
+            print(f"Blockchain: Validating block {current.index}...")
+            print(f"  Current previous_hash: {current.previous_hash}")
+            print(f"  Previous current_hash: {previous.current_hash}")
+
             # Kiểm tra hash của block trước đó
             if current.previous_hash != previous.current_hash:
-                print(f"Validation Error: Block {current.index} previous_hash mismatch.")
+                print(f"Blockchain Validation Error: Block {current.index} previous_hash mismatch.")
                 return False
 
             # Tính lại hash của block hiện tại và so sánh
             calculated_current_hash = current.calculate_hash()
+            print(f"  Current actual hash: {current.current_hash}")
+            print(f"  Calculated hash: {calculated_current_hash}")
+
             if current.current_hash != calculated_current_hash:
-                print(f"Validation Error: Block {current.index} current_hash mismatch.")
+                print(f"Blockchain Validation Error: Block {current.index} current_hash mismatch.")
                 return False
 
+            # Kiểm tra Proof-of-Work (nếu cần) - Đảm bảo hash bắt đầu bằng "0000"
+            if not current.current_hash.startswith("0000"):
+                print(f"Blockchain Validation Error: Block {current.index} does not meet PoW difficulty.")
+                return False
+
+        print("Blockchain: Chain is valid.")
         return True
