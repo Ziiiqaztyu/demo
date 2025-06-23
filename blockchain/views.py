@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from .utils import Blockchain
 from .models import PendingTransaction, Block
 from django.http import JsonResponse
+from datetime import date # Thêm import này
 
 blockchain = Blockchain()
 
@@ -12,10 +13,24 @@ blockchain = Blockchain()
 def producer_view(request):
     if request.method == 'POST':
         producer = request.POST.get('producer')
-        amount = request.POST.get('amount')
-        date = request.POST.get('date')
-        blockchain.add_transaction(producer, amount, date)
-        return redirect('producer')
+        amount_str = request.POST.get('amount') # Lấy dưới dạng string
+        date_str = request.POST.get('date')   # Lấy dưới dạng string
+        
+        try:
+            # Chuyển đổi amount sang integer
+            amount = int(amount_str)
+            # Chuyển đổi date string sang đối tượng date
+            production_date = date.fromisoformat(date_str) # Giả định định dạng 'YYYY-MM-DD'
+            
+            blockchain.add_transaction(producer, amount, production_date)
+            return redirect('producer')
+        except ValueError as e:
+            # Xử lý lỗi nếu amount không phải số hoặc date sai định dạng
+            return render(request, 'blockchain/producer.html', {'error': f'Dữ liệu nhập không hợp lệ: {e}'})
+        except Exception as e:
+            # Xử lý các lỗi khác trong quá trình thêm giao dịch
+            return render(request, 'blockchain/producer.html', {'error': f'Có lỗi xảy ra khi thêm giao dịch: {e}'})
+            
     return render(request, 'blockchain/producer.html')
 
 # Trang 2: Xác thực (Nhà phân phối/Đại lý)

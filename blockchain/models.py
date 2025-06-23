@@ -1,8 +1,9 @@
+# blockchain/models.py
 from django.db import models
 import hashlib
 import json
 from time import time
-#models.py
+
 class Block(models.Model):
     index = models.AutoField(primary_key=True)
     timestamp = models.FloatField(default=time)
@@ -10,7 +11,7 @@ class Block(models.Model):
     previous_hash = models.CharField(max_length=64)
     nonce = models.IntegerField(default=0)
     current_hash = models.CharField(max_length=64, blank=True)
-    public_hash = models.CharField(max_length=64, blank=True)  # For public verification
+    public_hash = models.CharField(max_length=64, blank=True)
     is_verified = models.BooleanField(default=False)
 
     def calculate_hash(self):
@@ -36,4 +37,4 @@ class PendingTransaction(models.Model):
     production_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     verifications = models.JSONField(default=list)  # Track verification nodes
-    is_ready_for_block = models.BooleanField(default=False) #thêm dòng này mong là nó chạy oke trên render :(((
+    is_ready_for_block = models.BooleanField(default=False) # <-- THÊM DÒNG NÀY
