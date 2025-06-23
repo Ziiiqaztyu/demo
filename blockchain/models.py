@@ -2,7 +2,7 @@ from django.db import models
 import hashlib
 import json
 from time import time
-
+#models.py
 class Block(models.Model):
     index = models.AutoField(primary_key=True)
     timestamp = models.FloatField(default=time)

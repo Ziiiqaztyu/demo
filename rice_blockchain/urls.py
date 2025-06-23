@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.urls import path
 from blockchain import views
-from django.views.generic.base import RedirectView 
-
+from django.views.generic.base import RedirectView
+#urls.py
 urlpatterns = [
     path('producer/', views.producer_view, name='producer'),
     path('verification/', views.verification_view, name='verification'),
