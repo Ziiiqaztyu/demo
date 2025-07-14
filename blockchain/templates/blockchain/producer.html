@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends 'blockchain/main.html' %}
 
-<head>
-    <title>Nhập Thông Tin Gạo</title>
-</head>
+{% block content %}
 
-<body>
+
+
+
     <h1>Nhà Sản Xuất</h1>
     <form method="post">
         {% csrf_token %}
@@ -15,12 +14,4 @@
         <button type="submit">Gửi Thông Tin</button>
     </form>
 
-        <nav style="margin-bottom: 20px;">
-            <a href="{% url 'producer' %}">Trang nhập dữ liệu</a> |  {# Changed from 'block_list' to 'producer' #}
-            <a href="{% url 'verification' %}">Xác nhận giao dịch</a> | {# Changed from 'block_list' to 'verification' #}
-            <a href="{% url 'block_list' %}">Xem block</a> |
-            <a href="{% url 'verify_block' %}">Kiểm tra hash</a>
-        </nav>
-</body>
-
-</html>
+{% endblock %}

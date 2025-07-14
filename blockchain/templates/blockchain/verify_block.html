@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
+{% extends 'blockchain/main.html' %}
 
-<head>
-    <title>Kiểm Tra Block</title>
-</head>
+{% block content %}
 
-<body>
     <h1>Kiểm Tra Tính Hợp Lệ Block</h1>
     <form method="post">
         {% csrf_token %}
@@ -28,12 +24,4 @@
     <p style="color: red">{{ error }}</p>
     {% endif %}
 
-    <nav style="margin-bottom: 20px">
-        <a href="{% url 'producer' %}">Trang nhập dữ liệu</a> |
-        <a href="{% url 'verification' %}">Xác nhận giao dịch</a> |
-        <a href="{% url 'block_list' %}">Xem block</a> |
-        <a href="{% url 'verify_block' %}">Kiểm tra hash</a>
-    </nav>
-</body>
-
-</html>
+{% endblock %}

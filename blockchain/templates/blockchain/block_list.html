@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
+{% extends 'blockchain/main.html' %}
 
-<head>
-    <title>Toàn Bộ Blockchain</title>
-</head>
-
-<body>
+{% block content %}
     <h1>Danh Sách Block</h1>
     {% for block in blocks %}
     <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
@@ -24,12 +19,6 @@
 
     </div>
     {% endfor %}
-    <nav style="margin-bottom: 20px;">
-        <a href="{% url 'producer' %}">Trang nhập dữ liệu</a> | {# Changed from 'block_list' to 'producer' #}
-        <a href="{% url 'verification' %}">Xác nhận giao dịch</a> | {# Changed from 'block_list' to 'verification' #}
-        <a href="{% url 'block_list' %}">Xem block</a> |
-        <a href="{% url 'verify_block' %}">Kiểm tra hash</a>
-    </nav>
-</body>
 
-</html>
+
+{% endblock %}

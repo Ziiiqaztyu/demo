@@ -1,0 +1,22 @@
+{% extends 'blockchain/main.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Chào mừng đến với trang chủ!</h4>
+        <p>Chúc bạn có một ngày mới thành công</p>
+        <hr>
+        <p class="mb-0">Đây là trang chính của Rice-blockchain.</p>
+    </div>
+
+    {% if user.is_authenticated %}
+        <p>Xin chào, {{ user.username }}!</p>
+        <p><a href="{% url 'logout' %}" class="btn btn-danger">Đăng xuất</a></p>
+    {% else %}
+        <p>Bạn chưa đăng nhập. Vui lòng <a href="{% url 'signin' %}">đăng nhập</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

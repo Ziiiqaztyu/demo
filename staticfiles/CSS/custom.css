@@ -1,0 +1,38 @@
+/* static/css/custom.css */
+
+body {
+    background-color: #f4f7f6; /* Một màu nền nhẹ nhàng */
+}
+
+/* Căn giữa form login/register */
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Style cho các card hiển thị thông tin */
+.info-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.info-card h3, .info-card h4 {
+    color: #0d6efd; /* Màu xanh của Bootstrap */
+}
+
+.info-card p strong {
+    color: #343a40;
+}
+
+/* Một chút khoảng cách cho các dòng trong card */
+.info-card p {
+    margin-bottom: 0.5rem;
+}

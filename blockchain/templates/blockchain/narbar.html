@@ -1,0 +1,50 @@
+{% load static %}
+    
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        {# Always visible links #}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        
+        {# Links visible ONLY if the user is authenticated (logged in) #}
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'producer' %}">Trang nhập dữ liệu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'verification' %}">Xác nhận giao dịch</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'block_list' %}">Xem block</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'verify_block' %}">Kiểm tra hash</a>
+          </li>
+        {% endif %}
+      </ul>
+
+      {# Login/Logout and Welcome message section #}
+      <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+        {% if user.is_authenticated %}
+          <li class="nav-item me-3">
+            <span class="nav-link text-white-50">{{ user.username }}</span>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-light" href="{% url 'logout' %}">Đăng xuất</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'signin' %}">Đăng nhập</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+    

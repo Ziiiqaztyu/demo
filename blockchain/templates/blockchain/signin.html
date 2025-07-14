@@ -1,0 +1,22 @@
+{% extends 'blockchain/main.html' %}
+{% comment %} {% load crispy_forms_tags %}  {% endcomment %}
+{% block content %}
+<div class="form-container">
+    <h2 class="text-center mb-4">Đăng Nhập</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Tên đăng nhập</label>
+            <input type="text" name="username" class="form-control" id="id_username" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Mật khẩu</label>
+            <input type="password" name="password" class="form-control" id="id_password" required>
+        </div>
+        <button class="btn btn-primary w-100" type="submit">Đăng Nhập</button>
+    </form>
+    <div class="text-center mt-3">
+        <small class="text-muted">Chưa có tài khoản? <a href="{% url 'register' %}">Đăng ký tại đây</a></small>
+    </div>
+</div>
+{% endblock %}

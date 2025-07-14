@@ -17,11 +17,19 @@ Including another URLconf
 from django.urls import path
 from blockchain import views
 from django.views.generic.base import RedirectView 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('producer/', views.producer_view, name='producer'),
     path('verification/', views.verification_view, name='verification'),
     path('verify-block/', views.verify_block_view, name='verify_block'),
     path('blocks/', views.block_list_view, name='block_list'),
-    path('', RedirectView.as_view(pattern_name='producer', permanent=False))
+    path('signin/', views.signin, name='signin'),
+    path('register/', views.register_view, name='register'),
+    path('logout/', views.user_logout, name='logout'),
+    path('', views.home, name='home')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
