@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Xác Thực Giao Dịch</title>
+</head>
+
+<body>
+    <h1>Xác Thực Giao Dịch</h1>
+    <h2>Giao Dịch Chờ Xử Lý</h2>
+    <ul>
+        {% for tx in transactions %}
+        <li>
+            {{ tx.producer }} - {{ tx.rice_amount }}kg - {{ tx.production_date }}
+            <form method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="transaction_id" value="{{ tx.id }}">
+                <select name="verifier" required>
+                    <option value="distributor">Nhà Phân Phối</option>
+                    <option value="agent">Đại Lý</option>
+                </select>
+                <button type="submit">Xác Nhận</button>
+            </form>
+        </li>
+        {% empty %}
+        <li>Không có giao dịch chờ</li>
+        {% endfor %}
+    </ul>
+
+        <nav style="margin-bottom: 20px;">
+            <a href="{% url 'producer' %}">Trang nhập dữ liệu</a> |  {# Changed from 'block_list' to 'producer' #}
+            <a href="{% url 'verification' %}">Xác nhận giao dịch</a> | {# Changed from 'block_list' to 'verification' #}
+            <a href="{% url 'block_list' %}">Xem block</a> |
+            <a href="{% url 'verify_block' %}">Kiểm tra hash</a>
+        </nav>
+</body>
+
+</html>
