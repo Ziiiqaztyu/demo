@@ -37,7 +37,7 @@ def producer_view(request):
         except Exception as e:
             return render(request, 'blockchain/producer.html', {'error': f'Có lỗi xảy ra khi thêm giao dịch: {e}'})
 
-    return render(request, 'blockchain/producer.html')
+    return render(request, 'blockchain/producer.html', {'title': 'Input'})
 
 
 # Trang 2: Xác thực (Nhà phân phối/Đại lý) - Sửa phần này
@@ -75,7 +75,8 @@ def verification_view(request):
 
     return render(request, 'blockchain/verification.html', {
         'transactions': pending_transactions,
-        'error': error_message
+        'error': error_message,
+        'title': 'Check'
     })
 
 # Trang 3: Kiểm tra block (GIỮ NGUYÊN)
@@ -93,12 +94,12 @@ def verify_block_view(request):
         except Exception as e: # Catch lỗi chung nếu có
             print(f"Error in verify_block_view: {e}")
             return render(request, 'blockchain/verify_block.html', {'error': f'Có lỗi xảy ra: {e}'})
-    return render(request, 'blockchain/verify_block.html')
+    return render(request, 'blockchain/verify_block.html', {'title': 'Verify'})
 
 # Trang 4: Xem blockchain (GIỮ NGUYÊN)
 def block_list_view(request):
     chain = Block.objects.all().order_by('-index')
-    return render(request, 'blockchain/block_list.html', {'blocks': chain})
+    return render(request, 'blockchain/block_list.html', {'blocks': chain, 'title': 'List'})
 
 def signin(request):
     if request.method == 'POST':
